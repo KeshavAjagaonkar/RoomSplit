@@ -1,44 +1,42 @@
-/**
- * Computes settlement instructions from net balances.
- *
- * @param {Object} balances - Net balances per member
- * @returns {Array} settlements - Who pays whom and how much
- */
 export function computeSettlements(balances) {
-  const settlements = [];
-
-  // Create working copies (DO NOT mutate original balances)
   const creditors = [];
   const debtors = [];
 
-  Object.entries(balances).forEach(([member, balance]) => {
-    if (balance > 0) {
-      creditors.push({ member, amount: balance });
-    } else if (balance < 0) {
-      debtors.push({ member, amount: -balance });
+  Object.entries(balances).forEach(([member, paise]) => {
+    if (paise > 0) {
+      creditors.push({ member, amount: paise });
+    } else if (paise < 0) {
+      debtors.push({ member, amount: -paise });
     }
   });
 
-  let i = 0; // debtor index
-  let j = 0; // creditor index
+  const totalCredit = creditors.reduce((s, c) => s + c.amount, 0);
+  const totalDebt = debtors.reduce((s, d) => s + d.amount, 0);
+
+  if (totalCredit !== totalDebt) {
+    throw new Error("Invariant broken: balances do not sum to zero");
+  }
+
+  const settlements = [];
+  let i = 0, j = 0;
 
   while (i < debtors.length && j < creditors.length) {
-    const debtor = debtors[i];
-    const creditor = creditors[j];
+    const d = debtors[i];
+    const c = creditors[j];
 
-    const settleAmount = Math.min(debtor.amount, creditor.amount);
+    const amt = Math.min(d.amount, c.amount);
 
     settlements.push({
-      from: debtor.member,
-      to: creditor.member,
-      amount: settleAmount
+      from: d.member,
+      to: c.member,
+      amount: amt / 100 // convert ONLY for UI
     });
 
-    debtor.amount -= settleAmount;
-    creditor.amount -= settleAmount;
+    d.amount -= amt;
+    c.amount -= amt;
 
-    if (debtor.amount === 0) i++;
-    if (creditor.amount === 0) j++;
+    if (d.amount === 0) i++;
+    if (c.amount === 0) j++;
   }
 
   return settlements;

@@ -1,35 +1,29 @@
-/**
- * Computes net balances for each member based on expense history.
- *
- * @param {string[]} members - List of all room members
- * @param {Array} expenses - List of expense events
- * @returns {Object} balances - Net balance per member
- */
 export function computeBalances(members, expenses) {
   const balances = {};
 
-  // 1. Initialize all members with 0 balance
-  members.forEach(member => {
-    balances[member] = 0;
+  // Initialize balances in paise
+  members.forEach(m => {
+    balances[m] = 0;
   });
 
-  // 2. Process each expense
-  expenses.forEach(expense => {
-    const { amount, paidBy, sharedAmong } = expense;
+  expenses.forEach(exp => {
+    const { amount, paidBy, sharedAmong } = exp;
 
-    // Defensive check (not mandatory, but safe)
-    if (!sharedAmong || sharedAmong.length === 0) return;
+    // Convert to paise ONCE
+    const totalPaise = Math.round(amount * 100);
+    const share = Math.floor(totalPaise / sharedAmong.length);
+    const remainder = totalPaise % sharedAmong.length;
 
-    const share = amount / sharedAmong.length;
-
-    // 3. Each shared member owes their share
-    sharedAmong.forEach(member => {
-      balances[member] -= share;
+    // Each participant pays equal share
+    sharedAmong.forEach((member, index) => {
+      // Distribute remainder fairly
+      const extra = index < remainder ? 1 : 0;
+      balances[member] -= (share + extra);
     });
 
-    // 4. Payer gets credited full amount
-    balances[paidBy] += amount;
+    // Payer gets full credit
+    balances[paidBy] += totalPaise;
   });
 
-  return balances;
+  return balances; // STILL IN PAISE
 }
