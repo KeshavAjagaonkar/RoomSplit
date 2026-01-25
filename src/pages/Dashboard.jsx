@@ -6,9 +6,7 @@ function Dashboard() {
       {/* Two-column layout */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
 
-        {/* ===================== */}
-        {/* USER LIST CONTAINER   */}
-        {/* ===================== */}
+        
         <section className="bg-white border border-gray-200 rounded-lg p-6">
           <h2 className="text-lg font-medium text-gray-900 mb-4">
             Members
@@ -32,9 +30,7 @@ function Dashboard() {
           </div>
         </section>
 
-        {/* ===================== */}
-        {/* ADD EXPENSE CONTAINER */}
-        {/* ===================== */}
+       
         <section className="bg-white border border-gray-200 rounded-lg p-6">
           <h2 className="text-lg font-medium text-gray-900 mb-6">
             Add Expense
@@ -42,7 +38,7 @@ function Dashboard() {
 
           <div className="space-y-5">
 
-            {/* Amount */}
+           
             <div>
               <label className="block text-sm text-gray-700 mb-1">
                 Amount
@@ -54,7 +50,7 @@ function Dashboard() {
               />
             </div>
 
-            {/* Paid By */}
+            
             <div>
               <label className="block text-sm text-gray-700 mb-1">
                 Paid By
