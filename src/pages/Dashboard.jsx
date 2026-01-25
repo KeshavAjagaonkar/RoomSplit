@@ -8,7 +8,7 @@ function Dashboard({ setExpenses, balances }) {
       {/* ===================== */}
       {/* ROOM STATUS SUMMARY  */}
       {/* ===================== */}
-      <div
+      {/* <div
         className={`mb-6 rounded-lg border border-gray-200 px-4 py-3 ${
           roomStatus.emphasis ? "bg-gray-100" : "bg-gray-50"
         }`}
@@ -16,7 +16,7 @@ function Dashboard({ setExpenses, balances }) {
         <p className="text-sm text-gray-800">
           {roomStatus.message}
         </p>
-      </div>
+      </div> */}
 
       {/* ===================== */}
       {/* TWO-COLUMN LAYOUT     */}
@@ -52,7 +52,7 @@ function Dashboard({ setExpenses, balances }) {
           </p>
 
           <div className="space-y-6">
-            {/* Amount */}
+           
             <div>
               <label className="block text-sm text-gray-700 mb-1">
                 Amount
@@ -70,7 +70,7 @@ function Dashboard({ setExpenses, balances }) {
               />
             </div>
 
-            {/* Paid By */}
+            
             <div>
               <label className="block text-sm text-gray-700 mb-1">
                 Paid By
