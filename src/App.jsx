@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState,useMemo } from "react";
+import { useMemo } from "react";
 import Nav from "./components/Layout/Nav.jsx";
 
 import Dashboard from "./pages/Dashboard.jsx";
@@ -15,18 +15,12 @@ function App() {
   // 1. Source of truth: expenses
   const [expenses, setExpenses] = useLocalStorage("expenses", []);
 
-  // 2. Simulated identity
-  const [activeUser, setActiveUser] = useState(members[0]);
 
   // 3. Derived data: balances (NOT stored)
   const balances = useMemo(() => {
     return computeBalances(members, expenses);
   }, [expenses]);
 
-  // 4. Add expense handler
-  function handleAddExpense(expense) {
-    setExpenses(prev => [...prev, expense]);
-  }
 
   return (
     <>
@@ -39,9 +33,7 @@ function App() {
           <Route
             path="/"
             element={
-              <Dashboard
-                members={members}
-                expenses={expenses}
+              <Dashboard              
                 setExpenses={setExpenses}
                 balances={balances}
               />

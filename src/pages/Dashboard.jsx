@@ -1,38 +1,34 @@
+import AddExpense from "../components/AddExpense.jsx";
 import PageContainer from "../components/Layout/PageContainer.jsx";
+import { members } from "../data/member.js";
 
-function Dashboard() {
+function Dashboard({ setExpenses, balances }) {
   return (
     <PageContainer title="Room Dashboard">
       {/* Two-column layout */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-
-        
         <section className="bg-white border border-gray-200 rounded-lg p-6">
-          <h2 className="text-lg font-medium text-gray-900 mb-4">
-            Members
-          </h2>
+          <h2 className="text-lg font-medium text-gray-900 mb-4">Members</h2>
 
           <div className="space-y-3">
-            <div className="flex justify-between items-center border border-gray-200 rounded-md p-3">
-              <span className="text-gray-900">Rahul</span>
-              <span className="text-sm text-gray-600">owes ₹46.34</span>
-            </div>
-
-            <div className="flex justify-between items-center border border-gray-200 rounded-md p-3">
-              <span className="text-gray-900">Amit</span>
-              <span className="text-sm text-gray-600">is owed ₹69.50</span>
-            </div>
-
-            <div className="flex justify-between items-center border border-gray-200 rounded-md p-3">
-              <span className="text-gray-900">Neha</span>
-              <span className="text-sm text-gray-500">settled</span>
-            </div>
+            {members.map(member => {
+              const balance = balances[member.id] || 0;
+              const balanceInRupees = (balance / 100).toFixed(2);
+              const isPositive = balance > 0;
+              const isNegative = balance < 0;
+              const status = isPositive ? `is owed ₹${balanceInRupees}` : isNegative ? `owes ₹${Math.abs(balanceInRupees)}` : 'settled';
+              return (
+                <div key={member.id} className="flex justify-between items-center border border-gray-200 rounded-md p-3">
+                  <span className="text-gray-900">{member.name}</span>
+                  <span className={`text-sm ${isPositive ? 'text-green-600' : isNegative ? 'text-red-600' : 'text-gray-500'}`}>{status}</span>
+                </div>
+              );
+            })}
           </div>
         </section>
 
-       
         <section className="bg-white border border-gray-200 rounded-lg p-6">
-          <h2 className="text-lg font-medium text-gray-900 mb-6">
+          {/* <h2 className="text-lg font-medium text-gray-900 mb-6">
             Add Expense
           </h2>
 
@@ -63,7 +59,7 @@ function Dashboard() {
               </select>
             </div>
 
-            {/* Category */}
+         
             <div>
               <label className="block text-sm text-gray-700 mb-1">
                 Category
@@ -76,7 +72,7 @@ function Dashboard() {
               </select>
             </div>
 
-            {/* Shared Among */}
+            
             <div>
               <label className="block text-sm text-gray-700 mb-2">
                 Shared Among
@@ -102,14 +98,14 @@ function Dashboard() {
               </div>
             </div>
 
-            {/* Button */}
+           
             <button className="w-full bg-black text-white text-sm font-medium py-2 rounded-md hover:bg-gray-800 transition">
               Add Expense
             </button>
 
-          </div>
+          </div> */}
+          <AddExpense members={members} onAddExpense={setExpenses} />
         </section>
-
       </div>
     </PageContainer>
   );

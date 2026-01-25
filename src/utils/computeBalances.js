@@ -3,7 +3,7 @@ export function computeBalances(members, expenses) {
 
   // Initialize balances in paise
   members.forEach(m => {
-    balances[m] = 0;
+    balances[m.id] = 0;
   });
 
   expenses.forEach(exp => {
