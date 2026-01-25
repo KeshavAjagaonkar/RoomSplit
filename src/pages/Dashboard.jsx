@@ -5,7 +5,22 @@ import { members } from "../data/member.js";
 function Dashboard({ setExpenses, balances }) {
   return (
     <PageContainer title="Room Dashboard">
-      {/* Two-column layout */}
+      {/* ===================== */}
+      {/* ROOM STATUS SUMMARY  */}
+      {/* ===================== */}
+      <div
+        className={`mb-6 rounded-lg border border-gray-200 px-4 py-3 ${
+          roomStatus.emphasis ? "bg-gray-100" : "bg-gray-50"
+        }`}
+      >
+        <p className="text-sm text-gray-800">
+          {roomStatus.message}
+        </p>
+      </div>
+
+      {/* ===================== */}
+      {/* TWO-COLUMN LAYOUT     */}
+      {/* ===================== */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
         <section className="bg-white border border-gray-200 rounded-lg p-6">
           <h2 className="text-lg font-medium text-gray-900 mb-4">Members</h2>
@@ -32,30 +47,46 @@ function Dashboard({ setExpenses, balances }) {
             Add Expense
           </h2>
 
-          <div className="space-y-5">
+          <p className="text-sm text-gray-500 mb-4">
+            Add a shared expense and split it among selected members.
+          </p>
 
-           
+          <div className="space-y-6">
+            {/* Amount */}
             <div>
               <label className="block text-sm text-gray-700 mb-1">
                 Amount
               </label>
               <input
                 type="number"
+                value={amount}
+                onChange={e => setAmount(e.target.value)}
                 placeholder="Enter amount"
-                className="w-full border border-gray-300 rounded-md px-3 py-2 text-gray-900 focus:outline-none focus:ring-1 focus:ring-gray-400"
+                className="
+                  w-full border border-gray-300 rounded-md px-3 py-2
+                  text-gray-900
+                  focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-gray-400
+                "
               />
             </div>
 
-            
+            {/* Paid By */}
             <div>
               <label className="block text-sm text-gray-700 mb-1">
                 Paid By
               </label>
-              <select className="w-full border border-gray-300 rounded-md px-3 py-2 bg-white text-gray-900 focus:outline-none focus:ring-1 focus:ring-gray-400">
-                <option>Rahul</option>
-                <option>Amit</option>
-                <option>Neha</option>
-                <option>Sita</option>
+              <select
+                value={paidBy}
+                onChange={e => setPaidBy(e.target.value)}
+                className="
+                  w-full border border-gray-300 rounded-md px-3 py-2
+                  bg-white text-gray-900
+                  focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-gray-400
+                "
+              >
+                {members.map(m => (
+                  <option key={m}>{m}</option>
+                ))}
               </select>
             </div>
 
@@ -64,7 +95,15 @@ function Dashboard({ setExpenses, balances }) {
               <label className="block text-sm text-gray-700 mb-1">
                 Category
               </label>
-              <select className="w-full border border-gray-300 rounded-md px-3 py-2 bg-white text-gray-900 focus:outline-none focus:ring-1 focus:ring-gray-400">
+              <select
+                value={category}
+                onChange={e => setCategory(e.target.value)}
+                className="
+                  w-full border border-gray-300 rounded-md px-3 py-2
+                  bg-white text-gray-900
+                  focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-gray-400
+                "
+              >
                 <option>Food</option>
                 <option>Utilities</option>
                 <option>Travel</option>
@@ -78,23 +117,21 @@ function Dashboard({ setExpenses, balances }) {
                 Shared Among
               </label>
 
-              <div className="grid grid-cols-2 gap-3">
-                <label className="flex items-center gap-2 text-sm text-gray-800">
-                  <input type="checkbox" className="accent-black" />
-                  Rahul
-                </label>
-                <label className="flex items-center gap-2 text-sm text-gray-800">
-                  <input type="checkbox" className="accent-black" />
-                  Amit
-                </label>
-                <label className="flex items-center gap-2 text-sm text-gray-800">
-                  <input type="checkbox" className="accent-black" />
-                  Neha
-                </label>
-                <label className="flex items-center gap-2 text-sm text-gray-800">
-                  <input type="checkbox" className="accent-black" />
-                  Sita
-                </label>
+              <div className="grid grid-cols-2 gap-y-2 gap-x-4">
+                {members.map(m => (
+                  <label
+                    key={m}
+                    className="flex items-center gap-2 text-sm text-gray-800 cursor-pointer hover:text-gray-900"
+                  >
+                    <input
+                      type="checkbox"
+                      checked={sharedAmong.has(m)}
+                      onChange={() => toggleSharedMember(m)}
+                      className="accent-black"
+                    />
+                    {m}
+                  </label>
+                ))}
               </div>
             </div>
 
