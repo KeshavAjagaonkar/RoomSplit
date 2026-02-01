@@ -2,6 +2,7 @@
 import PageContainer from "../components/Layout/PageContainer";
 import { computeSettlements } from "../utils/computeSettlements";
 import { members } from "../data/member";
+import { ArrowRight, CheckCheck, Wallet } from "lucide-react";
 
 function Settlements({ balances, setExpenses }) {
   // Accept setExpenses prop
@@ -40,39 +41,62 @@ function Settlements({ balances, setExpenses }) {
 
   return (
     <PageContainer title="Settlements">
-      <div className="max-w-2xl mx-auto">
-        <section className="bg-white border border-gray-200 rounded-lg p-6">
-          <h2 className="text-lg font-medium text-gray-900 mb-4">
-            Recommended Transactions
-          </h2>
+      <div className="max-w-3xl mx-auto">
+        <section className="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl">
+          <div className="flex items-center gap-3 mb-8">
+            <div className="p-2 bg-indigo-500/10 rounded-lg">
+              <Wallet className="h-6 w-6 text-indigo-400" />
+            </div>
+            <h2 className="text-xl font-semibold text-white">
+              Recommended Transactions
+            </h2>
+          </div>
 
           {settlements.length === 0 ? (
-            <p className="text-gray-500 text-center py-4">All settled up!</p>
+            <div className="text-center py-12 bg-slate-950/50 rounded-xl border border-dashed border-slate-800">
+              <div className="inline-flex items-center justify-center p-4 bg-emerald-500/10 rounded-full mb-4">
+                <CheckCheck className="h-8 w-8 text-emerald-500" />
+              </div>
+              <p className="text-slate-400 font-medium">All balances are settled up!</p>
+            </div>
           ) : (
-            <div className="space-y-3">
+            <div className="grid gap-4">
               {settlements.map((tx, index) => (
                 <div
                   key={index}
-                  className="flex flex-col sm:flex-row justify-between items-center border border-gray-200 rounded-md p-3 gap-3"
+                  className="group relative overflow-hidden bg-slate-950 border border-slate-800 rounded-xl p-5 hover:border-indigo-500/50 transition-all duration-300"
                 >
-                  <div className="flex items-center gap-2 text-gray-900">
-                    <span className="font-semibold">{memberMap[tx.from]}</span>
-                    <span className="text-sm text-gray-500">pays</span>
-                    <span className="font-semibold">{memberMap[tx.to]}</span>
-                  </div>
+                  <div className="flex flex-col sm:flex-row justify-between items-center gap-4 relative z-10">
+                    <div className="flex items-center gap-4 w-full sm:w-auto justify-between sm:justify-start">
+                      <div className="flex items-center gap-3">
+                        <div className="h-10 w-10 rounded-full bg-rose-500/10 flex items-center justify-center text-rose-400 font-medium border border-rose-500/20">
+                          {memberMap[tx.from].charAt(0)}
+                        </div>
+                        <span className="font-medium text-slate-200">{memberMap[tx.from]}</span>
+                      </div>
 
-                  <div className="flex items-center gap-4 w-full sm:w-auto justify-between sm:justify-end">
-                    <span className="font-bold text-gray-900">
-                      ₹{tx.amount.toFixed(2)}
-                    </span>
+                      <ArrowRight className="text-slate-600" size={18} />
 
-                    {/* Button Logic Added Here */}
-                    <button
-                      onClick={() => handleSettle(tx.from, tx.to, tx.amount)}
-                      className="bg-black text-white text-xs font-medium px-3 py-1.5 rounded hover:bg-gray-800 transition"
-                    >
-                      Settle
-                    </button>
+                      <div className="flex items-center gap-3">
+                        <span className="font-medium text-slate-200 text-right">{memberMap[tx.to]}</span>
+                        <div className="h-10 w-10 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-400 font-medium border border-emerald-500/20">
+                          {memberMap[tx.to].charAt(0)}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-4 w-full sm:w-auto justify-between sm:justify-end pl-0 sm:pl-8 sm:border-l sm:border-slate-800">
+                      <span className="text-xl font-bold text-white tracking-tight">
+                        ₹{tx.amount.toFixed(2)}
+                      </span>
+
+                      <button
+                        onClick={() => handleSettle(tx.from, tx.to, tx.amount)}
+                        className="bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors shadow-lg shadow-indigo-500/20"
+                      >
+                        Settle
+                      </button>
+                    </div>
                   </div>
                 </div>
               ))}

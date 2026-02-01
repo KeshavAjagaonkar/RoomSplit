@@ -44,11 +44,13 @@ const Summary = ({ expenses, balances }) => {
     .filter((item) => item.value > 0);
 
   return (
-    <div className="min-h-screen bg-white text-black p-4 md:p-8">
+    <div className="min-h-screen p-4 md:p-8">
       <div className="max-w-7xl mx-auto">
-        <header className="mb-8">
-          <h1 className="text-3xl font-bold text-black">Expense Summary</h1>
-          <p className="text-gray-600 mt-2">
+        <header className="mb-10">
+          <h1 className="text-3xl font-bold mb-2 bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent w-fit">
+            Expense Summary
+          </h1>
+          <p className="text-slate-400">
             Complete overview of all expenses and balances
           </p>
         </header>
@@ -80,7 +82,7 @@ const Summary = ({ expenses, balances }) => {
             <BarChartComponent data={barChartData} />
             {barChartData.length === 0 && (
               <div className="text-center py-8">
-                <p className="text-gray-500">No category data available</p>
+                <p className="text-slate-500">No category data available</p>
               </div>
             )}
           </ChartSection>
@@ -89,15 +91,15 @@ const Summary = ({ expenses, balances }) => {
             <PieComponent data={pieChartData} />
             {pieChartData.length === 0 && (
               <div className="flex items-center justify-center h-full">
-                <p className="text-gray-500">All balances are settled!</p>
+                <p className="text-slate-500">All balances are settled!</p>
               </div>
             )}
           </ChartSection>
         </div>
 
         {/* Quick Balances */}
-        <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-          <h2 className="text-xl font-bold text-black mb-6 pb-2 border-b border-gray-200">
+        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-lg">
+          <h2 className="text-xl font-bold text-white mb-6 pb-4 border-b border-slate-800">
             Quick Balances
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">

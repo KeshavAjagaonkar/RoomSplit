@@ -24,28 +24,41 @@ const BarChartComponent = ({ data }) => {
           bottom: 5,
         }}
       >
-        <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-        <XAxis dataKey="name" stroke="#666" fontSize={12} />
+        <CartesianGrid strokeDasharray="3 3" stroke="#334155" vertical={false} />
+        <XAxis
+          dataKey="name"
+          stroke="#94a3b8"
+          fontSize={12}
+          tickLine={false}
+          axisLine={false}
+        />
         <YAxis
-          stroke="#666"
+          stroke="#94a3b8"
           fontSize={12}
           tickFormatter={(value) => value.toFixed(0)}
+          tickLine={false}
+          axisLine={false}
         />
         <Tooltip
-          formatter={(value) => [`${value.toFixed(2)}`, "Amount"]}
+          formatter={(value) => [`₹${value.toFixed(2)}`, "Amount"]}
           labelFormatter={(label) => `Category: ${label}`}
           contentStyle={{
-            backgroundColor: "white",
-            border: "1px solid #e5e7eb",
-            borderRadius: "0.375rem",
+            backgroundColor: "#0f172a",
+            border: "1px solid #1e293b",
+            borderRadius: "0.5rem",
+            color: "#f1f5f9",
+            boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.5)"
           }}
+          itemStyle={{ color: "#e2e8f0" }}
+          cursor={{ fill: "#1e293b", opacity: 0.5 }}
         />
-        <Legend />
+        <Legend wrapperStyle={{ paddingTop: "20px" }} />
         <Bar
           dataKey="value"
           name="Amount"
-          fill="#4f46e5"
-          radius={[4, 4, 0, 0]}
+          fill="#6366f1"
+          radius={[6, 6, 0, 0]}
+          barSize={40}
         />
       </BarChart>
     </ResponsiveContainer>

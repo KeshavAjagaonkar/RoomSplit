@@ -1,49 +1,64 @@
 import { NavLink } from "react-router-dom";
+import { LayoutDashboard, PieChart, Receipt, Wallet } from "lucide-react";
+import clsx from "clsx";
 
 function Nav() {
-  const base =
-    "px-3 py-2 rounded-md text-sm font-medium transition-colors";
+  const linkBase =
+    "flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200";
   const inactive =
-    "text-gray-600 hover:text-gray-900 hover:bg-gray-100";
+    "text-slate-400 hover:text-white hover:bg-slate-800/50";
   const active =
-    "text-black-600 bg-indigo-50";
+    "text-white bg-indigo-600 shadow-[0_0_15px_rgba(79,70,229,0.3)]";
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-gray-200 bg-white">
-  <div className="flex justify-center">
-    <div className="max-w-4xl w-full px-6">
-      <div className="flex h-14 items-center justify-center gap-15">
-        <NavLink
-          to="/"
-          end
-          className={({ isActive }) =>
-            `${base} ${isActive ? active : inactive}`
-          }
-        >
-          Dashboard
-        </NavLink>
+    <nav className="sticky top-0 z-50 border-b border-slate-800 bg-slate-950/80 backdrop-blur-xl">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex h-16 items-center justify-between">
 
-        <NavLink
-          to="/summary"
-          className={({ isActive }) =>
-            `${base} ${isActive ? active : inactive}`
-          }
-        >
-          Summary
-        </NavLink>
+          <div className="flex items-center gap-2">
+            <div className="p-2 bg-indigo-600 rounded-lg shadow-lg shadow-indigo-500/20">
+              <Wallet className="h-5 w-5 text-white" />
+            </div>
+            <span className="text-lg font-bold bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent hidden sm:block">
+              ExpenseFlow
+            </span>
+          </div>
 
-        <NavLink
-          to="/settlements"
-          className={({ isActive }) =>
-            `${base} ${isActive ? active : inactive}`
-          }
-        >
-          Settlements
-        </NavLink>
+          <div className="flex items-center gap-1 sm:gap-4 bg-slate-900/50 p-1.5 rounded-full border border-slate-800/50">
+            <NavLink
+              to="/"
+              end
+              className={({ isActive }) =>
+                clsx(linkBase, isActive ? active : inactive)
+              }
+            >
+              <LayoutDashboard size={18} />
+              <span className="hidden sm:block">Dashboard</span>
+            </NavLink>
+
+            <NavLink
+              to="/summary"
+              className={({ isActive }) =>
+                clsx(linkBase, isActive ? active : inactive)
+              }
+            >
+              <PieChart size={18} />
+              <span className="hidden sm:block">Summary</span>
+            </NavLink>
+
+            <NavLink
+              to="/settlements"
+              className={({ isActive }) =>
+                clsx(linkBase, isActive ? active : inactive)
+              }
+            >
+              <Receipt size={18} />
+              <span className="hidden sm:block">Settlements</span>
+            </NavLink>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</nav>
+    </nav>
   );
 }
 
