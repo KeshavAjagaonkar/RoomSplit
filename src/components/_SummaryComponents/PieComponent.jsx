@@ -18,24 +18,39 @@ const PieComponent = ({ data }) => {
           cy="50%"
           labelLine={false}
           label={({ cx, cy, midAngle, innerRadius, outerRadius, percent }) => {
+            if (percent < 0.05) return null; // hide very small slices (<5%)
+
             const RADIAN = Math.PI / 180;
             const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
             const x = cx + radius * Math.cos(-midAngle * RADIAN);
             const y = cy + radius * Math.sin(-midAngle * RADIAN);
-            if (percent < 0.05) return null; // Hide labels for small segments
+
             return (
-              <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central" fontSize={12} fontWeight="bold">
+              <text
+                x={x}
+                y={y}
+                fill="white"
+                textAnchor="middle"
+                dominantBaseline="central"
+                fontSize={12}
+                fontWeight="bold"
+              >
                 {`${(percent * 100).toFixed(0)}%`}
               </text>
             );
           }}
           outerRadius={100}
-          innerRadius={60}
-          paddingAngle={5}
+          innerRadius={50}
+          paddingAngle={2}
           dataKey="value"
         >
           {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} stroke="#0f172a" strokeWidth={2} />
+            <Cell
+              key={`cell-${index}`}
+              fill={COLORS[index % COLORS.length]}
+              stroke="#0f172a"
+              strokeWidth={2}
+            />
           ))}
         </Pie>
         <Tooltip
@@ -55,7 +70,7 @@ const PieComponent = ({ data }) => {
             border: "1px solid #1e293b",
             borderRadius: "0.5rem",
             color: "#f1f5f9",
-            boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.5)"
+            boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.5)",
           }}
           itemStyle={{ color: "#e2e8f0" }}
         />

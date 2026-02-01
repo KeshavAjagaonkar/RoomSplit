@@ -12,15 +12,19 @@ function Nav() {
 
   return (
     <nav className="sticky top-0 z-50 border-b border-slate-800 bg-slate-950/80 backdrop-blur-xl">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
 
           <div className="flex items-center gap-2">
-            <div className="p-2 bg-indigo-600 rounded-lg shadow-lg shadow-indigo-500/20">
-              <Wallet className="h-5 w-5 text-white" />
+            <div className="p-1 bg-indigo-600 rounded-lg shadow-lg shadow-indigo-500/20">
+              <img
+              src="/logo.png"
+              alt="logo"
+              className="w-8 h-8"
+              />
             </div>
-            <span className="text-lg font-bold bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent hidden sm:block">
-              ExpenseFlow
+            <span className="text-lg font-bold bg-linear-to-r from-white to-slate-400 bg-clip-text text-transparent hidden sm:block">
+              RoomSplit
             </span>
           </div>
 

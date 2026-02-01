@@ -43,7 +43,7 @@ function Dashboard({ setExpenses, balances }) {
               return (
                 <div
                   key={member.id}
-                  className="group relative bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-indigo-500/50 transition-all duration-300 shadow-lg hover:shadow-indigo-500/10"
+                  className="group relative bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-indigo-500/50 transition-all duration-300 shadow-lg hover:shadow-indigo-500/10 cursor-pointer"
                 >
                   <div className="flex justify-between items-start mb-4">
                     <div className="p-2.5 rounded-lg bg-slate-800 text-slate-300 group-hover:text-white group-hover:bg-indigo-600 transition-colors">

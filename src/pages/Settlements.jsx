@@ -25,7 +25,7 @@ function Settlements({ balances, setExpenses }) {
     }
 
     const settlementTransaction = {
-      id: Date.now(),
+      id: Date.now,
       amount: Number(amount), // Ensure it's a number
       category: "Settlement", // Special category we can filter later
       paidBy: Number(fromId), // The person paying (Debtor)
@@ -41,7 +41,7 @@ function Settlements({ balances, setExpenses }) {
 
   return (
     <PageContainer title="Settlements">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         <section className="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl">
           <div className="flex items-center gap-3 mb-8">
             <div className="p-2 bg-indigo-500/10 rounded-lg">
