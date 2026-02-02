@@ -28,14 +28,7 @@ const fadeInDown = {
   }
 };
 
-const scaleIn = {
-  hidden: { opacity: 0, scale: 0.8 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: { duration: 0.5, ease: "easeOut" }
-  }
-};
+
 
 const staggerContainer = {
   hidden: { opacity: 0 },
@@ -70,7 +63,7 @@ function Home() {
   return (
     <div className="min-h-screen bg-slate-950">
       {/* Hero Section */}
-      <section className="relative overflow-hidden">
+      <section className="relative overflow-hidden md:min-h-screen">
         {/* Gradient Background Effect */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -147,29 +140,7 @@ function Home() {
               </Link>
             </motion.div>
 
-            {/* Stats */}
-            <motion.div
-              variants={staggerContainer}
-              className="grid grid-cols-3 gap-6 max-w-2xl mx-auto pt-12"
-            >
-              {[
-                { value: "25+", label: "Active Users" },
-                { value: "₹50K+", label: "Managed Monthly", color: "text-emerald-400" },
-                { value: "98%", label: "Satisfaction", color: "text-indigo-400" }
-              ].map((stat, index) => (
-                <motion.div
-                  key={index}
-                  variants={scaleIn}
-                  whileHover={{ scale: 1.1 }}
-                  className="text-center"
-                >
-                  <div className={`text-3xl font-bold ${stat.color || "text-white"}`}>
-                    {stat.value}
-                  </div>
-                  <div className="text-sm text-slate-500 mt-1">{stat.label}</div>
-                </motion.div>
-              ))}
-            </motion.div>
+           
           </motion.div>
         </div>
       </section>
