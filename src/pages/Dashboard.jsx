@@ -6,7 +6,7 @@ import { User, Wallet, CheckCircle2 } from "lucide-react";
 function Dashboard({ setExpenses, balances }) {
   return (
     <PageContainer title="Room Dashboard">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mt-24">
         {/* MEMBERS SECTION */}
         <section className="col-span-1 lg:col-span-7 space-y-6">
           <div className="flex items-center justify-between mb-4">

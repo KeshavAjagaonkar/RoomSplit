@@ -11,8 +11,6 @@ A modern, student-friendly budgeting app designed for hostel life. Track expense
 [![Live Demo](https://img.shields.io/badge/demo-live-success?style=for-the-badge&logo=vercel)](https://roomsplit-demo.vercel.app/)
 [![GitHub](https://img.shields.io/badge/github-source-blue?style=for-the-badge&logo=github)](https://github.com/KeshavAjagaonkar/RoomSplit)
 
-[View Demo](https://roomsplit-demo.vercel.app/) · [Report Bug](https://github.com/KeshavAjagaonkar/RoomSplit/issues)
-
 </div>
 
 ---
@@ -22,6 +20,11 @@ A modern, student-friendly budgeting app designed for hostel life. Track expense
 ### Landing Page
 <div align="center">
   <img src="./public/banner.png" width="100%" alt="Landing Page">
+</div>
+
+### Feature Section
+<div align="center">
+  <img src="./public/feature.png" width="100%" alt="Feature section">
 </div>
 
 ### Dashboard

@@ -79,20 +79,24 @@ const Summary = ({ expenses, balances }) => {
         {/* Charts */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
           <ChartSection title="Expenses by Category">
-            <BarChartComponent data={barChartData} />
-            {barChartData.length === 0 && (
+            {barChartData.length === 0 ? (
               <div className="text-center py-8">
                 <p className="text-slate-500">No category data available</p>
               </div>
+            ) : (
+              <BarChartComponent data={barChartData} />
+
             )}
           </ChartSection>
 
           <ChartSection title="Balances Distribution">
-            <PieComponent data={pieChartData} />
-            {pieChartData.length === 0 && (
+            {pieChartData.length === 0 ? (
               <div className="flex items-center justify-center h-full">
                 <p className="text-slate-500">All balances are settled!</p>
               </div>
+            ) : (
+
+              <PieComponent data={pieChartData} />
             )}
           </ChartSection>
         </div>

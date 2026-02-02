@@ -64,18 +64,27 @@ function AddExpense({ members, onAddExpense }) {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-4 min-h-32">
           <div>
             <label className="block text-sm font-medium text-slate-400 mb-2">Category</label>
             <select
               value={category}
               onChange={e => setCategory(e.target.value)}
-              className="w-full px-4 py-2.5 bg-slate-950 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 appearance-none transition-colors"
+              className="w-full px-4 py-2.5 bg-slate-950 border border-slate-700 rounded-lg text-white 
+             focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 
+             appearance-none transition-colors cursor-pointer"
             >
               {categories.map(cat => (
-                <option key={cat} value={cat}>{cat}</option>
+                <option
+                  key={cat}
+                  value={cat}
+                  className="cursor-pointer"
+                >
+                  {cat}
+                </option>
               ))}
             </select>
+
           </div>
 
           <div>
@@ -102,9 +111,9 @@ function AddExpense({ members, onAddExpense }) {
                   key={m.id}
                   type="button"
                   onClick={() => toggleShare(m.id)}
-                  className={`flex items-center justify-between px-4 py-2 rounded-lg border transition-all duration-200 ${isSelected
-                      ? "bg-indigo-600 border-indigo-500 text-white"
-                      : "bg-slate-950 border-slate-800 text-slate-400 hover:border-slate-700"
+                  className={`flex items-center justify-between px-4 py-2 rounded-lg border transition-all cursor-pointer duration-200 ${isSelected
+                    ? "bg-indigo-600 border-indigo-500 text-white"
+                    : "bg-slate-950 border-slate-800 text-slate-400 hover:border-slate-700 "
                     }`}
                 >
                   <span className="text-sm font-medium">{m.name}</span>
@@ -118,7 +127,7 @@ function AddExpense({ members, onAddExpense }) {
         <button
           type="submit"
           disabled={!amount || sharedAmong.length === 0}
-          className="w-full bg-gradient-to-r from-indigo-600 to-cyan-500 hover:from-indigo-500 hover:to-cyan-400 text-white font-semibold py-3 px-4 rounded-lg shadow-lg shadow-indigo-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+          className="w-full bg-linear-to-r from-indigo-600 to-cyan-500 hover:from-indigo-500 hover:to-cyan-400 text-white font-semibold py-3 px-4 rounded-lg shadow-lg shadow-indigo-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
         >
           Add Expense
         </button>
